@@ -95,13 +95,15 @@ The Flask app is designed to provide a user registration and authentication syst
 
 Rate limiting is a technique used to control the number of requests a client can make to a server in a specific time period. It helps prevent abuse, misuse, and excessive usage of your API, ensuring fair access for all users. In our Flask application, we've implemented rate limiting using the Flask-Limiter extension.
 
-In our Flask app, we've applied rate limiting to the /generate_array endpoint, allowing a maximum of 10 requests per minute for each client. This ensures that no single client can flood your server with requests.
+In our Flask app, we've applied rate limiting to the `/generate_array` endpoint, allowing a maximum of 10 requests per minute for each client. This ensures that no single client can flood our server with requests.
 
 
 ### Endpoints
 
 
 1. **`/health`** : Allows users to check if the app is up and running. This endpoint can be used in auto monitoring tools like Kubernetes to check if the app is running in the background.
+
+   HTTP Method: `GET`
 
 2. **`/register`** : 
 Allows users to register with a username and password. Prevents duplicate username registrations.
