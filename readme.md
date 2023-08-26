@@ -34,6 +34,7 @@ flask_app_folder/
 │   └── users.yaml
 ├── .env
 ├── requirements.txt
+├── readme.md
 ```
 
 
@@ -57,7 +58,7 @@ flask_app_folder/
    ```
 
 ### Environment Configuration
-Environment Configuration :\
+
 Before running the application, make sure to configure the environment variables by creating a .env file in the root directory of your project. This file should contain key-value pairs for various configuration settings. In this case, we'll use the .env file to specify the port on which the Flask app will run.
 
 Create a `.env` file in the project root directory and set the desired port for the app
