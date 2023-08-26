@@ -41,7 +41,7 @@ flask_app_folder/
 1. Clone this repository:
    ```bash
    git clone https://github.com/siri15243/flask_app.git
-   cd project_folder
+   cd flask_app
    ```
 2. Create a virtual environment and activate it
 
@@ -93,99 +93,99 @@ The Flask app is designed to provide a user registration and authentication syst
 ### Endpoints
 
 
-`/health` : Allows users to check if the app is up and running. This endpoint can be used in auto monitoring tools like Kubernetes to check if the app is running in the background.
+1. **`/health`** : Allows users to check if the app is up and running. This endpoint can be used in auto monitoring tools like Kubernetes to check if the app is running in the background.
 
-`/register` : 
+2. **`/register`** : 
 Allows users to register with a username and password. Prevents duplicate username registrations.
 
-HTTP Method: `POST`
+   HTTP Method: `POST`
 
-Request Body:
+   Request Body:
 
-   ```json
-    {
-    "username": "new_user",
-    "password": "new_password"
-    }
- ```
-
-Response -> Status Code: 200 (OK)
-
-   ```json
-    {
-    "message": "User registered successfully"
-    }
- ```
-
-Body (Failure - Username already exists):
-
-   ```json
-    {
-    "message": "User registered already, Please login"
-    }
+      ```json
+      {
+      "username": "new_user",
+      "password": "new_password"
+      }
    ```
 
-`/login` : 
+   Response -> Status Code: 200 (OK)
+
+      ```json
+      {
+      "message": "User registered successfully"
+      }
+   ```
+
+   Body (Failure - Username already exists):
+
+      ```json
+      {
+      "message": "User registered already, Please login"
+      }
+      ```
+
+3. **`/login`** : 
 Allows users to log in with their registered username and password. Returns a JWT token on successful login. This JWT Token can be used to authenticate the future queries of protected endpoints such as `/generate_array` in our case.
 
-HTTP Method: `POST`
+   HTTP Method: `POST`
 
-Request Body:
+   Request Body:
+
+      ```json
+      {
+      "username": "user1",
+      "password": "password1"
+      }
+   ```
+   Response -> Status Code: 200 (OK)
+
+      ```json
+      {
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+      }
+   ```
+
+   Status Code: 401 (Unauthorized)
+   Body (Failure - Authentication):
+      ```json
+      {
+      "message": "Authentication failed"
+      }
+   ```
+
+4. **`/generate_array`** : Generates a 500-dimensional random float array when provided with an input sentence. Requires a valid JWT token for authenticated access.
+
+   HTTP Method: `POST`
+
+   Request Body:
 
    ```json
-    {
-    "username": "user1",
-    "password": "password1"
-    }
-```
-Response -> Status Code: 200 (OK)
+      {
+      "sentence": "This is a sample sentence"
+      }
+   ```
+
+   Headers:
+   Authorization: Bearer `<JWT Token>` \
+   Response:
+
+   Status Code: 200 (OK)
+   ```json
+      [
+      0.123,
+      0.456,
+      ...
+      ]
+   ```
+   Status Code: 401 (Unauthorized)
+   Body (Failure - Authentication):
 
    ```json
-    {
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
-    }
-```
-
-Status Code: 401 (Unauthorized)
-Body (Failure - Authentication):
-   ```json
-    {
-    "message": "Authentication failed"
-    }
-```
-
-`/generate_array` : Generates a 500-dimensional random float array when provided with an input sentence. Requires a valid JWT token for authenticated access.
-
-HTTP Method: `POST`
-
-Request Body:
-
-```json
-    {
-    "sentence": "This is a sample sentence"
-    }
-```
-
-Headers:
-Authorization: Bearer `<JWT Token>` \
-Response:
-
-Status Code: 200 (OK)
-```json
-    [
-    0.123,
-    0.456,
-    ...
-    ]
-```
-Status Code: 401 (Unauthorized)
-Body (Failure - Authentication):
-
-```json
-    {
-    "message": "Token is missing"
-    }
-```
+      {
+      "message": "Token is missing"
+      }
+   ```
 #### Endpoint Summary
 In summary, the `/register` endpoint allows users to create accounts, the `/login` endpoint provides authentication, and the `/generate_array` endpoint generates random float arrays based on input sentences. The app ensures secure registration, login, and authenticated access to certain functionalities using JWT tokens.
 
