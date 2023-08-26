@@ -1,0 +1,6 @@
+flask
+flask-limiter
+flask_testing
+python-dotenv
+pyyaml
+PyJwt
