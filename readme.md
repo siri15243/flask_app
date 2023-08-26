@@ -11,7 +11,8 @@ This documentation provides a comprehensive guide on setting up, running, and us
     3. [Environment Configuration](#environment-configuration)
 3. [Running the App](#running-the-app)
 4. [App Overview](#app-overview)
-    1. [Endpoints](#endpoints)
+    1. [Rate Limiting](#rate-limiting)
+    2. [Endpoints](#endpoints)
     2. [Authentication](#authentication)
 5. [Unit Testing](#unit-testing)
 
@@ -89,6 +90,13 @@ Please ensure that you've installed Gunicorn and have the virtual environment ac
 
 ## App Overview
 The Flask app is designed to provide a user registration and authentication system along with an array generation API. The app uses JWT (JSON Web Tokens) for user authentication and secure API access.
+
+### Rate Limiting
+
+Rate limiting is a technique used to control the number of requests a client can make to a server in a specific time period. It helps prevent abuse, misuse, and excessive usage of your API, ensuring fair access for all users. In our Flask application, we've implemented rate limiting using the Flask-Limiter extension.
+
+In our Flask app, we've applied rate limiting to the /generate_array endpoint, allowing a maximum of 10 requests per minute for each client. This ensures that no single client can flood your server with requests.
+
 
 ### Endpoints
 
@@ -195,6 +203,7 @@ These endpoints collectively provide user registration, login, and data generati
 ### Authentication
 
 The app uses JWT for user authentication. Users receive tokens upon successful login, which they include in the headers of authenticated API requests.
+
 
 ## Unit Testing
 ### Handling Test Cases
