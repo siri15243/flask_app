@@ -40,7 +40,7 @@ flask_app_folder/
 
 1. Clone this repository:
    ```bash
-   git clone <repository_url>
+   git clone https://github.com/siri15243/flask_app.git
    cd project_folder
    ```
 2. Create a virtual environment and activate it
