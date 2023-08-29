@@ -17,8 +17,8 @@ USERS_FILE_PATH = os.path.join(BASE_DIR, 'users_db', 'users.yaml')
 app = Flask(__name__)
 load_dotenv()
 
-
-app.config['SECRET_KEY'] = 'test'
+secret_key = os.environ.get('SECRET_KEY')
+app.config['SECRET_KEY'] = secret_key
 
 random_gen = SystemRandom()
 
